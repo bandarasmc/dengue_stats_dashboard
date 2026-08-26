@@ -103,8 +103,8 @@ appropriate for this assignment's single-container deployment.
 
 ```bash
 # 1. Clone the repository
-git clone <your-repo-url>
-cd dengue-forecast
+git clone https://github.com/bandarasmc/dengue_stats_dashboard.git
+cd dengue_stats_dashboard
 
 # 2. Create a virtual environment (recommended)
 python3 -m venv venv
@@ -121,7 +121,7 @@ python train.py
 cd ..
 
 # 5. Run the app
-streamlit run app/streamlit_app.py
+python -m streamlit run streamlit_app.py
 ```
 
 The app will be available at `http://localhost:8501`.
@@ -145,25 +145,35 @@ run locally, and pushed to a container registry, as shown below.
    a custom scenario.
 
 ## 11. Docker Instructions
+1. Log in to Docker Hub:
 
-Build the image:
 ```bash
-docker build -t dengue-forecast-app .
+docker login
 ```
 
-Run the container:
+2. Build the image:
 ```bash
-docker run -p 8501:8501 dengue-forecast-app
+docker build -f Dockerfile -t streamlit-webapp:latest .
 ```
+
+3. Push the Streamlit image to Docker Hub:
+
+```bash
+docker tag streamlit-webapp:latest vilochana94/streamlit-webapp:latest
+docker push vilochana94/streamlit-webapp:latest
+```
+
+
+4. Run the Streamlit container:
+
+```bash
+docker run --rm -p 8501:8501 streamlit-webapp:latest
+```
+
 
 Then open `http://localhost:8501` in your browser.
 
-Push to Docker Hub:
-```bash
-docker tag dengue-forecast-app <your-dockerhub-username>/dengue-forecast-app:latest
-docker login
-docker push <your-dockerhub-username>/dengue-forecast-app:latest
-```
+
 
 ## Project Structure
 
