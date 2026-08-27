@@ -200,3 +200,6 @@ dengue-forecast/
 
 https://github.com/user-attachments/assets/a4f7d09a-0316-4e3a-8abc-63d2037aaa66
 
+## GCP Deployed App
+
+Access the depolyment via https://streamlit-webapp-602991165220.europe-west1.run.app/ 
